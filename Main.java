@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Main{
   public static void main(String[] args) {
     new Main();
@@ -5,24 +9,29 @@ public class Main{
 
   //double[] data;
   public Main(){
-    int size = 10;
+    int size = 10000;
     
     double[] data = new double[size];
+
     init(data, size);
 
-    ISorter sorter = new DoNothingSorter();
+    List<ISorter> sorters = new ArrayList<ISorter>();
+    sorters.add(new DoNothingSorter());
+    sorters.add(new BubbleSorter());
+    System.out.println("Name:\t\tSorted?:\tTime:");
+    System.out.println("------------------------------------------------------------");
 
-    sorter.sort(data);
-    printData(data);
-    boolean sorted = isSorted(data);
-    System.out.println(sorted);
-
-    sorter = new BubbleSorter();
-    sorter.sort(data);
-
-    printData(data);
-    sorted = isSorted(data);
-    System.out.println(sorted);
+    for(ISorter sorter : sorters){
+      long startTime;
+      long endTime;
+      double[] localData = Arrays.copyOf(data, data.length);
+      startTime = System.nanoTime();
+      sorter.sort(localData);
+      endTime = System.nanoTime();
+      double elapsedTime = ((endTime - startTime)/1000000000.0);
+      System.out.println(sorter.getClass().getName() + "\t" + isSorted(localData) + "\t\t" + elapsedTime + "s");
+      
+    }
   }
 
   void init(double[] data, int size){
