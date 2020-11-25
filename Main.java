@@ -18,6 +18,10 @@ public class Main{
     List<ISorter> sorters = new ArrayList<ISorter>();
     sorters.add(new DoNothingSorter());
     sorters.add(new BubbleSorter());
+    sorters.add(new SelectionSort());
+    sorters.add(new InsertionSort());
+    sorters.add(new MergeSort());
+    sorters.add(new QuickSort());
     System.out.println("Name:\t\tSorted?:\tTime:");
     System.out.println("------------------------------------------------------------");
 
@@ -30,7 +34,7 @@ public class Main{
       endTime = System.nanoTime();
       double elapsedTime = ((endTime - startTime)/1000000000.0);
       System.out.println(sorter.getClass().getName() + "\t" + isSorted(localData) + "\t\t" + elapsedTime + "s");
-      
+      //printData(localData);
     }
   }
 
