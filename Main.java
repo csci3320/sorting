@@ -9,15 +9,17 @@ public class Main{
 
   //double[] data;
   public Main(){
-    int size = 10000;
+    int size = 100000;
     
     double[] data = new double[size];
 
     init(data, size);
+    //double[] data = new double[]{4, 3, 1, 5,2};
 
     List<ISorter> sorters = new ArrayList<ISorter>();
     sorters.add(new DoNothingSorter());
     sorters.add(new BubbleSorter());
+    sorters.add(new BubbleShort());
     sorters.add(new SelectionSort());
     sorters.add(new InsertionSort());
     sorters.add(new MergeSort());
